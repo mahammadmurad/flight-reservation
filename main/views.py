@@ -9,7 +9,8 @@ from rest_framework.views import APIView
 from django.http import Http404
 ###########################################
 from rest_framework import generics, mixins
-
+########################################
+from rest_framework import viewsets
 
 ### with api_view decorator  ###
 # @api_view(['GET', 'POST'])
@@ -115,11 +116,15 @@ from rest_framework import generics, mixins
 
 
 ### with generic module ###
-class StudentListApi(generics.ListCreateAPIView):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+# class StudentListApi(generics.ListCreateAPIView):
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializer
 
+# class StudentDetailApi(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializer
 
-class StudentDetailApi(generics.RetrieveUpdateDestroyAPIView):
+### with viewsets module ###
+class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
