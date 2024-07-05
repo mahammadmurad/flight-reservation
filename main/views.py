@@ -11,6 +11,8 @@ from django.http import Http404
 from rest_framework import generics, mixins
 ########################################
 from rest_framework import viewsets
+########################################
+from django_filters.rest_framework import DjangoFilterBackend
 
 ### with api_view decorator  ###
 # @api_view(['GET', 'POST'])
@@ -128,3 +130,5 @@ from rest_framework import viewsets
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name', 'score']

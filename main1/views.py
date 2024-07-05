@@ -2,7 +2,10 @@ from django.shortcuts import render
 from .models import Author, Book
 from .serializers import AuthorSerializer, BookSerializer
 from rest_framework import generics
+################################################################
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+################################################################
+from rest_framework import filters
 
 class AuthorPagination(PageNumberPagination):
     page_size = 2
@@ -20,6 +23,10 @@ class AuthorListCreateView(generics.ListCreateAPIView):
     # pagination_class = AuthorPagination
     # pagination_class = LimitOffsetPagination
     pagination_class = AuthorPaginationLimit
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['first_name', 'last_name']
+    ordering_fields = ['pk']
+    # ordering = ['first_name']
 
 class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Author.objects.all()
