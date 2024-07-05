@@ -6,6 +6,9 @@ from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 ################################################################
 from rest_framework import filters
+######################################
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 class AuthorPagination(PageNumberPagination):
     page_size = 2
@@ -27,6 +30,9 @@ class AuthorListCreateView(generics.ListCreateAPIView):
     search_fields = ['first_name', 'last_name']
     ordering_fields = ['pk']
     # ordering = ['first_name']
+    ###################################
+    # authentication_classes = [BasicAuthentication] 
+    # permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
 class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Author.objects.all()
