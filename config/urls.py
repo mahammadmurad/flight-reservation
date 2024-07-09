@@ -21,6 +21,7 @@ from main import views
 from main.routers import router as main_router
 from flightApp.routers import router as flight_router
 from flightApp import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 # router = DefaultRouter()
 # router.register('students', views.StudentViewSet)
@@ -32,4 +33,5 @@ urlpatterns = [
     path("", include(flight_router.urls)),
     path("flightservice/", views.find_flights),
     path("flightservice/save-booking/", views.save_reservation),
+    path('api-token-auth/', obtain_auth_token, name='apit-token-auth'),
 ]
