@@ -19,12 +19,17 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from main import views
 from main.routers import router as main_router
+from flightApp.routers import router as flight_router
+from flightApp import views
 
 # router = DefaultRouter()
 # router.register('students', views.StudentViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include(main_router.urls)),
-    path('', include('main1.urls')),
+    path("admin/", admin.site.urls),
+    path("", include(main_router.urls)),
+    path("", include("main1.urls")),
+    path("", include(flight_router.urls)),
+    path("flightservice/", views.find_flights),
+    path("flightservice/save-booking/", views.save_reservation),
 ]
